@@ -1,20 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        IWebDriver WebDriver;
+
         public Form1()
         {
             InitializeComponent();
+            var options = new ChromeOptions();
+            options.AddExcludedArgument("enable-loggin");
+            WebDriver = new ChromeDriver(@"C:\Users\Ervins\source\repos\DuhhTOR\Exam2021rudens\WebDrivers", options);
+            WebDriver.Url = "https://www.ebay.com/";
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string searchField = "gh-ac";
+            string searchButton = "gh-btn";
+            
+            WebDriver.FindElement(By.Id(searchField)).SendKeys(textBox1.Text);
+            WebDriver.FindElement(By.Id(searchButton)).Click();
+            textBox2.Text = WebDriver.Url;
+            richTextBox1.AppendText(textBox2.Text);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            WebDriver.Navigate().Back();
+            textBox2.Text = "";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            WebDriver.Quit();
         }
     }
 }
