@@ -20,18 +20,16 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string searchField = "gh-ac";
-            string searchButton = "gh-btn";
-            
-            WebDriver.FindElement(By.Id(searchField)).SendKeys(textBox1.Text);
-            WebDriver.FindElement(By.Id(searchButton)).Click();
+            WebDriver.FindElement(By.Id("gh-ac")).SendKeys(textBox1.Text);
+            WebDriver.FindElement(By.Id("gh-btn")).Click();
             textBox2.Text = WebDriver.Url;
             richTextBox1.AppendText(textBox2.Text);
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            WebDriver.Navigate().Back();
+            WebDriver.Navigate().GoToUrl("https://www.ebay.com/");
             textBox2.Text = "";
         }
 
